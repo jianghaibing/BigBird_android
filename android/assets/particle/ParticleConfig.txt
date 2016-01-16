@@ -1,0 +1,20 @@
+java -cp /Users/baby/Downloads/libgdx-nightly-latest/gdx.jar:/Users/baby/Downloads/libgdx-nightly-latest/gdx-natives.jar:/Users/baby/Downloads/libgdx-nightly-latest/gdx-backend-lwjgl.jar:/Users/baby/Downloads/libgdx-nightly-latest/gdx-backend-lwjgl-natives.jar:/Users/baby/Downloads/libgdx-nightly-latest/extensions/gdx-tools/gdx-tools.jar com.badlogic.gdx.tools.particleeditor.ParticleEditor 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
