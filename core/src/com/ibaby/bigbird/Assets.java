@@ -1,6 +1,7 @@
 package com.ibaby.bigbird;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -15,6 +16,14 @@ public class Assets {
     public static TextureAtlas atlas;
     public static SpriteBatch batch;
     public static BitmapFont bitmapFont;
+
+    public static Sound jump;
+    public static Sound wind;
+    public static Sound oowh;
+    public static Sound buttonSound;
+    public static Sound handClap;
+    public static Sound warning;
+    public static Sound eatFish;
 
     //undisposable
     public static TextureRegion bird;
@@ -105,6 +114,14 @@ public class Assets {
         tapAnimation.setPlayMode(Animation.PlayMode.LOOP);
 
 
+        jump = Gdx.audio.newSound(Gdx.files.internal("sound/jump.mp3"));
+        wind = Gdx.audio.newSound(Gdx.files.internal("sound/wind.mp3"));
+        oowh = Gdx.audio.newSound(Gdx.files.internal("sound/oowh.mp3"));
+        buttonSound = Gdx.audio.newSound(Gdx.files.internal("sound/buttonSound.mp3"));
+        handClap = Gdx.audio.newSound(Gdx.files.internal("sound/handclap.wav"));
+        warning = Gdx.audio.newSound(Gdx.files.internal("sound/warning.wav"));
+        eatFish = Gdx.audio.newSound(Gdx.files.internal("sound/eatFish.mp3"));
+
     }
 
     public static void dispose(){
@@ -117,5 +134,60 @@ public class Assets {
         if (bitmapFont != null){
             bitmapFont.dispose();
         }
+        if (jump != null){
+            jump.dispose();
+        }
+        if (wind != null){
+            wind.dispose();
+        }
+        if (oowh != null){
+            oowh.dispose();
+        }
+        if (buttonSound != null){
+            buttonSound.dispose();
+        }
+        if (handClap != null){
+            handClap.dispose();
+        }
+        if (warning != null){
+            warning.dispose();
+        }
+        if (eatFish != null){
+            eatFish.dispose();
+        }
+    }
+
+    public static void playJumpSound(){
+        jump.play(1f);
+    }
+
+
+    public static void playWindSound(){
+        wind.play(1f);
+    }
+
+
+    public static void playOowhSound(){
+        oowh.play(1f);
+    }
+
+
+    public static void playButtonSound(){
+        buttonSound.play(1f);
+    }
+
+
+    public static void playHnadClapSound(){
+        handClap.play(1f);
+    }
+
+
+    public static void playWarningSound(){
+        warning.play(1f);
+    }
+
+
+    public static void playEatFishSound(){
+        eatFish.play(1f);
     }
 }

@@ -154,12 +154,10 @@ public class Bird extends Actor {
     }
 
     private void playWarningSound(){
-        Sound sound = Gdx.audio.newSound(Gdx.files.internal("sound/warning.wav"));
-        sound.play();
+        Assets.playWarningSound();
     }
 
     private void playJumpSound(){
-        Sound sound = Gdx.audio.newSound(Gdx.files.internal("sound/jump.mp3"));
-        sound.play();
+        Assets.playJumpSound();
     }
 }

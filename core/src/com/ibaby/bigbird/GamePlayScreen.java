@@ -2,13 +2,11 @@ package com.ibaby.bigbird;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
@@ -196,6 +194,7 @@ public class GamePlayScreen extends ScreenAdapter {
                     highestScoreLabel.setText("最高:" + highestScore + "M");
                     highestScoreLabel.setAlignment(Align.bottomRight);
                     DataManager.shareInstance().setHighScore(highestScore);
+
                 }
                 gamePlayStage.draw();
                 break;
@@ -234,6 +233,7 @@ public class GamePlayScreen extends ScreenAdapter {
                 GameMenuScreen menuScreen = new GameMenuScreen(bigBirdGame,true);
                 menuScreen.setScore(currentScore,highestScore);
                 bigBirdGame.setScreen(menuScreen);
+
             }
 
             if (Intersector.overlaps(bird.getBounds(),ground.getBounds())
@@ -292,20 +292,17 @@ public class GamePlayScreen extends ScreenAdapter {
 
 
     private void playWindSound(){
-        Sound sound = Gdx.audio.newSound(Gdx.files.internal("sound/wind.mp3"));
-        sound.play();
+        Assets.playWindSound();
     }
 
     private void playOowhSound(){
-        Sound sound = Gdx.audio.newSound(Gdx.files.internal("sound/oowh.mp3"));
-        sound.play();
+        Assets.playOowhSound();
     }
 
 
 
     private void playEatFishSound(){
-        Sound sound = Gdx.audio.newSound(Gdx.files.internal("sound/eatFish.mp3"));
-        sound.play();
+        Assets.playEatFishSound();
     }
 
 }

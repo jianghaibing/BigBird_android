@@ -2,7 +2,6 @@ package com.ibaby.bigbird;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -143,6 +142,7 @@ public class GameMenuScreen extends ScreenAdapter {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchUp(event, x, y, pointer, button);
+
             }
         });
 
@@ -185,8 +185,7 @@ public class GameMenuScreen extends ScreenAdapter {
     }
 
     private void playButtonSound(){
-        Sound sound = Gdx.audio.newSound(Gdx.files.internal("sound/buttonSound.mp3"));
-        sound.play();
+        Assets.playButtonSound();
     }
 
     @Override
