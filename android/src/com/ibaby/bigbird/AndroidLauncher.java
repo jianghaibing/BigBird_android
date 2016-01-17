@@ -1,5 +1,7 @@
 package com.ibaby.bigbird;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.View;
@@ -12,16 +14,21 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.games.Games;
+import com.google.example.games.basegameutils.GameHelper;
 
 import android.os.Handler;
 
 
-public class AndroidLauncher extends AndroidApplication implements AdHandler {
+public class AndroidLauncher extends AndroidApplication implements AdHandler,PlayServices{
 	private static final String TAG = "AndroidLauncher";
 	private static final int SHOW_ADS = 1 ;
 	private static final int HIDE_ADS = 0;
 	private static final String BAN_ID = "ca-app-pub-6026937026381965/7002164939";
 	protected AdView adView;
+
+	private GameHelper gameHelper;
+	private final static int requestCode = 1;
 
 	Handler handler = new Handler() {
 		@Override
@@ -42,9 +49,26 @@ public class AndroidLauncher extends AndroidApplication implements AdHandler {
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		gameHelper = new GameHelper(this,GameHelper.CLIENT_GAMES);
+		gameHelper.enableDebugLog(false);
+
+		GameHelper.GameHelperListener gameHelperListener = new GameHelper.GameHelperListener() {
+			@Override
+			public void onSignInFailed() {
+
+			}
+
+			@Override
+			public void onSignInSucceeded() {
+
+			}
+		};
+		gameHelper.setup(gameHelperListener);
+
 		RelativeLayout layout = new RelativeLayout(this);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		View gameView = initializeForView(new BigBirdGame(this), config);
+		View gameView = initializeForView(new BigBirdGame(this,this), config);
 		layout.addView(gameView);
 		adView = new AdView(this);
 		adView.setAdListener(new AdListener() {
@@ -69,7 +93,111 @@ public class AndroidLauncher extends AndroidApplication implements AdHandler {
 	}
 
 	@Override
+	protected void onStart() {
+		super.onStart();
+		gameHelper.onStart(this);
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		gameHelper.onStop();
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		gameHelper.onActivityResult(requestCode,requestCode,data);
+	}
+
+	@Override
 	public void showAds(boolean show) {
 		handler.sendEmptyMessage(show ? SHOW_ADS : HIDE_ADS);
+	}
+
+	@Override
+	public void signIn() {
+		try
+		{
+			runOnUiThread(new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					gameHelper.beginUserInitiatedSignIn();
+				}
+			});
+		}
+		catch (Exception e)
+		{
+			Gdx.app.log("MainActivity", "Log in failed: " + e.getMessage() + ".");
+		}
+	}
+
+	@Override
+	public void signOut() {
+		try
+		{
+			runOnUiThread(new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					gameHelper.signOut();
+				}
+			});
+		}
+		catch (Exception e)
+		{
+			Gdx.app.log("MainActivity", "Log out failed: " + e.getMessage() + ".");
+		}
+	}
+
+	@Override
+	public void rateGame() {
+		String str = "Your PlayStore Link";
+		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(str)));
+	}
+
+	@Override
+	public void unlockAchievement() {
+		Games.Achievements.unlock(gameHelper.getApiClient(), "CgkIre6iwq4WEAIQAA");
+	}
+
+	@Override
+	public void submitScore(int highScore) {
+		if (isSignedIn() == true)
+		{
+			Games.Leaderboards.submitScore(gameHelper.getApiClient(), "CgkIre6iwq4WEAIQAQ", highScore);
+		}
+	}
+
+	@Override
+	public void showAchievement() {
+		if (isSignedIn() == true)
+		{
+			startActivityForResult(Games.Achievements.getAchievementsIntent(gameHelper.getApiClient()),requestCode);
+		}
+		else
+		{
+			signIn();
+		}
+	}
+
+	@Override
+	public void showScore() {
+		if (isSignedIn() == true)
+		{
+			startActivityForResult(Games.Leaderboards.getLeaderboardIntent(gameHelper.getApiClient(),"CgkIre6iwq4WEAIQAQ"), requestCode);
+		}
+		else
+		{
+			signIn();
+		}
+	}
+
+	@Override
+	public boolean isSignedIn() {
+		return gameHelper.isSignedIn();
 	}
 }

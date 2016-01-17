@@ -2,5 +2,8 @@
 <resources>
 
     <string name="app_name">Big Bird</string>
+    <string name="app_id">768401258285</string>
+    <string name="achievement_senior">CgkIre6iwq4WEAIQAA</string>
+    <string name="leaderboard_socre">CgkIre6iwq4WEAIQAQ</string>
 
 </resources>
