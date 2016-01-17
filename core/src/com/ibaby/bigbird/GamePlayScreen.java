@@ -225,6 +225,7 @@ public class GamePlayScreen extends ScreenAdapter {
         for (Tornado tornado : tornados) {
             if (Intersector.overlaps(bird.getBounds(),tornado.getBounds())
                     || Intersector.overlaps(bird.getBounds(),tornado.getCircle()) ){
+                bigBirdGame.swarmInterface.submitScore(highestScore);
                 playWindSound();
                 state = State.STATIC;
                 if (bigBirdGame.adHandler != null) {
@@ -238,6 +239,7 @@ public class GamePlayScreen extends ScreenAdapter {
 
             if (Intersector.overlaps(bird.getBounds(),ground.getBounds())
                     || Intersector.overlaps(bird.getBounds(),shark.getBounds())){
+                bigBirdGame.swarmInterface.submitScore(highestScore);
                 playOowhSound();
                 state = State.STATIC;
                 if (bigBirdGame.adHandler != null) {

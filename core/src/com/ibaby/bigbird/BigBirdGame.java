@@ -8,9 +8,11 @@ public class BigBirdGame extends Game{
 	public static final int HEIGHT = 1920;
 	public static final String TITLE = "风狂大鸟";
 	protected AdHandler adHandler;
+	protected SwarmInterface swarmInterface;
 
-	public BigBirdGame(AdHandler adHandler) {
+	public BigBirdGame(AdHandler adHandler,SwarmInterface swarmInterface) {
 		this.adHandler = adHandler;
+		this.swarmInterface = swarmInterface;
 	}
 
 	@Override
