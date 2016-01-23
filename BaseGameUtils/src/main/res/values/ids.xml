@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_id">638608527597</string>
+    <string name="package_name">com.ibaby.bigbird</string>
+    <string name="achievement_junior_airman">CgkI7aGjgMsSEAIQAw</string>
+    <string name="achievement_free_fall">CgkI7aGjgMsSEAIQBA</string>
+    <string name="achievement_airman">CgkI7aGjgMsSEAIQBQ</string>
+    <string name="achievement_alive_so_ok">CgkI7aGjgMsSEAIQBg</string>
+    <string name="achievement_fully_eat">CgkI7aGjgMsSEAIQBw</string>
+    <string name="achievement_senior_rairman">CgkI7aGjgMsSEAIQCA</string>
+    <string name="achievement_piddlebig_fish">CgkI7aGjgMsSEAIQCQ</string>
+    <string name="achievement_piddlesmall_fish">CgkI7aGjgMsSEAIQCg</string>
+    <string name="achievement_wind_airman">CgkI7aGjgMsSEAIQCw</string>
+    <string name="leaderboard_best_flying">CgkI7aGjgMsSEAIQAg</string>
+    <string name="leaderboard_best_hunter">CgkI7aGjgMsSEAIQDA</string>
+
+</resources>

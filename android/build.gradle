@@ -25,6 +25,8 @@ android {
 dependencies {
     compile 'com.android.support:multidex:1.0.0'
     compile 'com.google.android.gms:play-services-ads:8.4.0'
+//    compile 'com.google.android.gms:play-services:8.4.0'
+//    compile 'com.android.support:appcompat-v7:23.1.1'
 }
 
 // called every time gradle gets executed, takes the native dependencies of
@@ -106,7 +108,7 @@ eclipse {
 // sets up the Android Idea project, using the old Ant based build.
 idea {
     module {
-        sourceDirs += file("src");scopes = [ COMPILE: [plus: [project.configurations.compile]]]        
+        sourceDirs += file ("src");scopes = [ COMPILE: [plus: [project.configurations.compile]]]        
 
         iml {
             withXml {
@@ -116,7 +118,7 @@ idea {
                 builder.component(name: "FacetManager") {
                     facet(type: "android", name: "Android") {
                         configuration {
-                            option(name: "UPDATE_PROPERTY_FILES" , value:"true")
+                            option(name:"UPDATE_PROPERTY_FILES" , value:"true")
                         }
                     }
                 }

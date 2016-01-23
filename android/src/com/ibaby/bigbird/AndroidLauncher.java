@@ -56,12 +56,12 @@ public class AndroidLauncher extends AndroidApplication implements AdHandler,Pla
 		GameHelper.GameHelperListener gameHelperListener = new GameHelper.GameHelperListener() {
 			@Override
 			public void onSignInFailed() {
-
+				Gdx.app.log("Login","登录失败");
 			}
 
 			@Override
 			public void onSignInSucceeded() {
-
+				Gdx.app.log("Login","登录成功");
 			}
 		};
 		gameHelper.setup(gameHelperListener);
@@ -155,20 +155,20 @@ public class AndroidLauncher extends AndroidApplication implements AdHandler,Pla
 
 	@Override
 	public void rateGame() {
-		String str = "Your PlayStore Link";
+		String str = "这里写playstore的地址";
 		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(str)));
 	}
 
 	@Override
-	public void unlockAchievement() {
-		Games.Achievements.unlock(gameHelper.getApiClient(), "CgkIre6iwq4WEAIQAA");
+	public void unlockAchievement(String achievementID) {
+		Games.Achievements.unlock(gameHelper.getApiClient(), achievementID);
 	}
 
 	@Override
 	public void submitScore(int highScore) {
 		if (isSignedIn() == true)
 		{
-			Games.Leaderboards.submitScore(gameHelper.getApiClient(), "CgkIre6iwq4WEAIQAQ", highScore);
+			Games.Leaderboards.submitScore(gameHelper.getApiClient(),getString(R.string.leaderboard_best_flying), highScore);
 		}
 	}
 
@@ -188,7 +188,7 @@ public class AndroidLauncher extends AndroidApplication implements AdHandler,Pla
 	public void showScore() {
 		if (isSignedIn() == true)
 		{
-			startActivityForResult(Games.Leaderboards.getLeaderboardIntent(gameHelper.getApiClient(),"CgkIre6iwq4WEAIQAQ"), requestCode);
+			startActivityForResult(Games.Leaderboards.getLeaderboardIntent(gameHelper.getApiClient(),getString(R.string.leaderboard_best_flying)), requestCode);
 		}
 		else
 		{
