@@ -19,7 +19,13 @@ import com.google.example.games.basegameutils.GameHelper;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
+import com.umeng.socialize.facebook.controller.UMFacebookHandler;
+import com.umeng.socialize.instagram.controller.UMInstagramHandler;
+import com.umeng.socialize.instagram.media.InstagramShareContent;
+import com.umeng.socialize.line.controller.UMLineHandler;
 import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.sso.UMSsoHandler;
+import com.umeng.socialize.whatsapp.controller.UMWhatsAppHandler;
 
 import android.os.Handler;
 
@@ -58,10 +64,36 @@ public class AndroidLauncher extends AndroidApplication implements AdHandler,Pla
 		super.onCreate(savedInstanceState);
 
 		// 设置分享内容
-		mController.setShareContent("I am playing [Bird VS Wind],come and play with me. IOS download address: https://itunes.apple.com/us/app/bird-vs-wind/id1077626569?l=zh&ls=1&mt=8 Android download address: " );
+		mController.setShareContent("I am playing [Bird VS Wind],come and play with me. IOS download address: https://itunes.apple.com/us/app/bird-vs-wind/id1077626569?l=zh&ls=1&mt=8 Android download address: ");
 		// 设置分享图片, 参数2为图片的url地址
-		mController.setShareMedia(new UMImage(getApplicationContext(), R.drawable.ic_launcher));
-		//mController.getConfig().removePlatform(SHARE_MEDIA.WEIXIN,SHARE_MEDIA.QQ,SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.TENCENT);
+		//mController.setShareMedia(new UMImage(getApplicationContext(), "https://is1-ssl.mzstatic.com/image/thumb/Purple69/v4/50/c1/9c/50c19cce-d29e-2b84-19e1-6161213c10be/pr_source.png/150x150bb.jpg"));
+
+		UMFacebookHandler mFacebookHandler = new UMFacebookHandler(this);
+		mFacebookHandler.addToSocialSDK();
+
+		mController.getConfig().supportAppPlatform(getApplicationContext(), SHARE_MEDIA.TWITTER,
+				"com.umeng.share", true);
+
+//		// 构建Instagram的Handler
+//		UMInstagramHandler instagramHandler = new UMInstagramHandler(getApplicationContext());
+//		// 将instagram添加到sdk中
+//		instagramHandler.addToSocialSDK();
+//		// 本地图片
+//		UMImage localImage = new UMImage(getApplicationContext(), R.drawable.ic_launcher);
+//		// 设置分享到Instagram的内容， 注意由于instagram客户端的限制，目前该平台只支持纯图片分享，文字、音乐、url图片等都无法分享。
+//		InstagramShareContent instagramShareContent = new InstagramShareContent(localImage);
+//		// 设置Instagram的分享内容
+//		mController.setShareMedia(instagramShareContent);
+		// 添加LINE平台
+		UMLineHandler lineHandler = new UMLineHandler(getApplicationContext());
+		lineHandler.addToSocialSDK();
+
+		// 添加WhatsApp平台
+		UMWhatsAppHandler whatsAppHandler = new UMWhatsAppHandler(getApplicationContext());
+		whatsAppHandler.addToSocialSDK();
+
+		mController.getConfig().setPlatforms(SHARE_MEDIA.FACEBOOK, SHARE_MEDIA.TWITTER,SHARE_MEDIA.LINE,SHARE_MEDIA.WHATSAPP);
+
 
 		gameHelper = new GameHelper(this,GameHelper.CLIENT_GAMES);
 		gameHelper.enableDebugLog(false);
@@ -120,7 +152,14 @@ public class AndroidLauncher extends AndroidApplication implements AdHandler,Pla
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		gameHelper.onActivityResult(requestCode,requestCode,data);
+		gameHelper.onActivityResult(requestCode, requestCode, data);
+
+		// 根据requestCode获取对应的SsoHandler
+		UMSsoHandler ssoHandler = mController.getConfig().getSsoHandler(
+				requestCode);
+		if (ssoHandler != null) {
+			ssoHandler.authorizeCallBack(requestCode, resultCode, data);
+		}
 	}
 
 	@Override
