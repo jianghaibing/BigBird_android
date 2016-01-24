@@ -16,11 +16,15 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.games.Games;
 import com.google.example.games.basegameutils.GameHelper;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.controller.UMServiceFactory;
+import com.umeng.socialize.controller.UMSocialService;
+import com.umeng.socialize.media.UMImage;
 
 import android.os.Handler;
 
 
-public class AndroidLauncher extends AndroidApplication implements AdHandler,PlayServices{
+public class AndroidLauncher extends AndroidApplication implements AdHandler,PlayServices,ShareInterface{
 	private static final String TAG = "AndroidLauncher";
 	private static final int SHOW_ADS = 1 ;
 	private static final int HIDE_ADS = 0;
@@ -29,6 +33,9 @@ public class AndroidLauncher extends AndroidApplication implements AdHandler,Pla
 
 	private GameHelper gameHelper;
 	private final static int requestCode = 1;
+
+	final UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share");
+
 
 	Handler handler = new Handler() {
 		@Override
@@ -50,6 +57,12 @@ public class AndroidLauncher extends AndroidApplication implements AdHandler,Pla
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		// 设置分享内容
+		mController.setShareContent("I am playing [Bird VS Wind],come and play with me. IOS download address: https://itunes.apple.com/us/app/bird-vs-wind/id1077626569?l=zh&ls=1&mt=8 Android download address: " );
+		// 设置分享图片, 参数2为图片的url地址
+		mController.setShareMedia(new UMImage(getApplicationContext(), R.drawable.ic_launcher));
+		//mController.getConfig().removePlatform(SHARE_MEDIA.WEIXIN,SHARE_MEDIA.QQ,SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.TENCENT);
+
 		gameHelper = new GameHelper(this,GameHelper.CLIENT_GAMES);
 		gameHelper.enableDebugLog(false);
 
@@ -68,7 +81,7 @@ public class AndroidLauncher extends AndroidApplication implements AdHandler,Pla
 
 		RelativeLayout layout = new RelativeLayout(this);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		View gameView = initializeForView(new BigBirdGame(this,this), config);
+		View gameView = initializeForView(new BigBirdGame(this,this,this), config);
 		layout.addView(gameView);
 		adView = new AdView(this);
 		adView.setAdListener(new AdListener() {
@@ -81,7 +94,7 @@ public class AndroidLauncher extends AndroidApplication implements AdHandler,Pla
 		adView.setAdSize(AdSize.SMART_BANNER);
 		adView.setAdUnitId(BAN_ID);
 		AdRequest.Builder builder = new AdRequest.Builder();
-		builder.addTestDevice("");
+		builder.addTestDevice("F837025308B47710471BAA749C5153AF");
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
 				RelativeLayout.LayoutParams.WRAP_CONTENT,
 				RelativeLayout.LayoutParams.WRAP_CONTENT
@@ -201,5 +214,28 @@ public class AndroidLauncher extends AndroidApplication implements AdHandler,Pla
 	@Override
 	public boolean isSignedIn() {
 		return gameHelper.isSignedIn();
+	}
+
+	@Override
+	public void share() {
+
+		try
+		{
+			runOnUiThread(new Runnable()
+			{
+				@Override
+				public void run() {
+
+					mController.openShare(AndroidLauncher.this, false);
+
+				}
+			});
+		}
+		catch (Exception e)
+		{
+			Gdx.app.log("ShareActivity", "ShareFailed: " + e.getMessage() + ".");
+		}
+
+
 	}
 }
