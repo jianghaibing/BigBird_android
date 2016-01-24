@@ -112,12 +112,12 @@ public class GameMenuScreen extends ScreenAdapter {
             scoreBoard.setPosition(BigBirdGame.WIDTH / 2, BigBirdGame.HEIGHT / 2 + BUTTON_DISTANCE + scoreBoard.getHeight() / 2 + restartButton.getHeight() / 2, Align.center);
             stage.addActor(scoreBoard);
 
-            currentScoreLabel = new Label("当前飞行: "+currentScore + "M",new Label.LabelStyle(Assets.bitmapFont, Color.WHITE));
+            currentScoreLabel = new Label("Current Score: "+currentScore + "M",new Label.LabelStyle(Assets.bitmapFont, Color.WHITE));
             currentScoreLabel.setPosition(bigBirdGame.WIDTH/2-currentScoreLabel.getWidth()/2, scoreBoard.getY()+ scoreBoard.getHeight()*0.7f,Align.center);
             currentScoreLabel.setFontScale(2f);
             stage.addActor(currentScoreLabel);
 
-            highestScoreLabel = new Label("最高飞行: "+highestScore + "M",new Label.LabelStyle(Assets.bitmapFont, Color.WHITE));
+            highestScoreLabel = new Label("Best Score: "+highestScore + "M",new Label.LabelStyle(Assets.bitmapFont, Color.WHITE));
             highestScoreLabel.setPosition(bigBirdGame.WIDTH/2-currentScoreLabel.getWidth()/2, scoreBoard.getY()+ scoreBoard.getHeight()*0.3f,Align.center);
             highestScoreLabel.setFontScale(2f);
             stage.addActor(highestScoreLabel);
@@ -206,7 +206,7 @@ public class GameMenuScreen extends ScreenAdapter {
 
 
     public void setScore(int currentScore,int highestScore){
-        currentScoreLabel.setText("当前飞行: " + currentScore + "M");
-        highestScoreLabel.setText("最高飞行: " + highestScore + "M");
+        currentScoreLabel.setText("Current Score: " + currentScore + "M");
+        highestScoreLabel.setText("Best Score: " + highestScore + "M");
     }
 }

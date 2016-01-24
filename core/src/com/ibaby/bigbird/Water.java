@@ -28,7 +28,7 @@ public class Water extends Image {
         setHeight(HEIGHT);
         setWidth(WIDTH);
         setZIndex(5);
-        velocity = new Vector2(-150,0);
+        velocity = new Vector2(-250,0);
     }
 
 

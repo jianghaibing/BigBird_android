@@ -161,7 +161,9 @@ public class AndroidLauncher extends AndroidApplication implements AdHandler,Pla
 
 	@Override
 	public void unlockAchievement(String achievementID) {
-		Games.Achievements.unlock(gameHelper.getApiClient(), achievementID);
+		if (isSignedIn() == true) {
+			Games.Achievements.unlock(gameHelper.getApiClient(), achievementID);
+		}
 	}
 
 	@Override

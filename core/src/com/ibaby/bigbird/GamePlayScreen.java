@@ -54,8 +54,14 @@ public class GamePlayScreen extends ScreenAdapter {
     private BigFish bigFish;
     private Array<BigFish> bigFishs;
 
+    private int fishCount = 0;
+    private boolean onlyBigFish = true;
+    private boolean onlySmallFish = true;
 
-    public GamePlayScreen(BigBirdGame bigBirdGame) {
+    private float currentY = 0;
+
+
+    public GamePlayScreen(final BigBirdGame bigBirdGame) {
         this.bigBirdGame = bigBirdGame;
         camera = new OrthographicCamera(BigBirdGame.WIDTH,BigBirdGame.HEIGHT);
         gamePlayStage = new Stage(new StretchViewport(BigBirdGame.WIDTH,BigBirdGame.HEIGHT));
@@ -70,13 +76,19 @@ public class GamePlayScreen extends ScreenAdapter {
         gamePlayStage.addActor(ground);
         bird = new Bird();
         bird.setPosition(BigBirdGame.WIDTH * 0.25f, BigBirdGame.HEIGHT * 0.5f, Align.center);
+        bird.setCallBack(new ICallBack() {
+            @Override
+            public void freeFall() {
+                bigBirdGame.playServices.unlockAchievement("CgkI7aGjgMsSEAIQBA");
+            }
+        });
         gamePlayStage.addActor(bird);
-        currentScoreLabel = new Label("当前:"+currentScore+"M",new Label.LabelStyle(Assets.bitmapFont,Color.valueOf("F5A623")));
+        currentScoreLabel = new Label("CS:"+currentScore+"M",new Label.LabelStyle(Assets.bitmapFont,Color.valueOf("F5A623")));
         currentScoreLabel.setPosition(20, BigBirdGame.HEIGHT * .97f);
         gamePlayStage.addActor(currentScoreLabel);
 
         highestScore = DataManager.shareInstance().getHighScore();
-        highestScoreLabel = new Label("最高:"+ highestScore +"M",new Label.LabelStyle(Assets.bitmapFont,Color.valueOf("5ECA8A")));
+        highestScoreLabel = new Label("BS:"+ highestScore +"M",new Label.LabelStyle(Assets.bitmapFont,Color.valueOf("5ECA8A")));
         highestScoreLabel.setPosition(BigBirdGame.WIDTH - 20, BigBirdGame.HEIGHT * 0.97f, Align.bottomRight);
         gamePlayStage.addActor(highestScoreLabel);
 
@@ -178,7 +190,7 @@ public class GamePlayScreen extends ScreenAdapter {
                 checkCollisions();
                 time+=delta;
                 currentScore = (int) (time * 2.5f);
-                currentScoreLabel.setText("当前:" + currentScore + "M");
+                currentScoreLabel.setText("CS:" + currentScore + "M");
                 progressNumberLabel.setText(String.valueOf(bird.energy) + "/100");
                 currentProgress.setWidth(BigBirdGame.WIDTH*.4f*bird.energy/100);
                 if (bird.energy>= 75){
@@ -191,11 +203,31 @@ public class GamePlayScreen extends ScreenAdapter {
 
                 if (currentScore> highestScore){
                     highestScore = currentScore;
-                    highestScoreLabel.setText("最高:" + highestScore + "M");
+                    highestScoreLabel.setText("BS:" + highestScore + "M");
                     highestScoreLabel.setAlignment(Align.bottomRight);
                     DataManager.shareInstance().setHighScore(highestScore);
+                    if (currentScore == 100){
+                        bigBirdGame.playServices.unlockAchievement("CgkI7aGjgMsSEAIQAw");
+                    }
+                    if (currentScore == 500){
+                        bigBirdGame.playServices.unlockAchievement("CgkI7aGjgMsSEAIQBQ");
+                    }
+                    if (currentScore == 2000){
+                        bigBirdGame.playServices.unlockAchievement("CgkI7aGjgMsSEAIQCA");
+                    }
+                    if (currentScore == 5000){
+                        bigBirdGame.playServices.unlockAchievement("CgkI7aGjgMsSEAIQCw");
+                    }
 
                 }
+
+                float lastY = currentY;
+                currentY = bird.getY();
+
+                if (bird.getY() - shark.getY()-shark.getHeight() < 30 && lastY - currentY < 0){
+                    bigBirdGame.playServices.unlockAchievement("CgkI7aGjgMsSEAIQBg");
+                }
+
                 gamePlayStage.draw();
                 break;
             case STATIC:
@@ -255,6 +287,24 @@ public class GamePlayScreen extends ScreenAdapter {
 
         for (SmallFish smallFish : smallFishs){
             if (Intersector.overlaps(bird.getBounds(),smallFish.getBounds())){
+
+                //fully eat
+                if (bird.energy >= 90){
+                    fishCount++;
+                }else {
+                    fishCount = 0;
+                }
+
+                if (fishCount >= 10){
+                    bigBirdGame.playServices.unlockAchievement("CgkI7aGjgMsSEAIQBw");
+                }
+
+                //挑食小鱼
+                onlyBigFish = false;
+                if (onlySmallFish && currentScore >= 1000){
+                    bigBirdGame.playServices.unlockAchievement("CgkI7aGjgMsSEAIQCg");
+                }
+
                 playEatFishSound();
                 smallFish.randomFishPosition();
                 bird.jumpVelocity += 150;
@@ -270,6 +320,24 @@ public class GamePlayScreen extends ScreenAdapter {
 
         for (BigFish bigFish : bigFishs){
             if (Intersector.overlaps(bird.getBounds(),bigFish.getBounds())){
+
+                //fully eat
+                if (bird.energy >= 85){
+                    fishCount++;
+                }else {
+                    fishCount = 0;
+                }
+
+                if (fishCount >= 10){
+                    bigBirdGame.playServices.unlockAchievement("CgkI7aGjgMsSEAIQBw");
+                }
+
+                //挑食大鱼
+                onlySmallFish = false;
+                if (onlyBigFish && currentScore >= 100){
+                    bigBirdGame.playServices.unlockAchievement("CgkI7aGjgMsSEAIQCQ");
+                }
+
                 playEatFishSound();
                 bigFish.randomFishPosition();
                 bird.jumpVelocity += 225;

@@ -30,7 +30,7 @@ public class Tornado extends Actor{
         region = new TextureRegion(Assets.tornado);
         setHeight(HEIGHT);
         setWidth(WIDTH);
-        velocity = new Vector2(-300,0);
+        velocity = new Vector2(-500,0);
         state = State.alive;
         bounds = new Rectangle(WIDTH/3f,10f,WIDTH/3f,(HEIGHT-10)/7f*3f);
         circle = new Circle(WIDTH/3f+WIDTH/6f,10f+(HEIGHT-10)/7f*3f+(HEIGHT-10f)/7f*2,(HEIGHT-10f)/7f*2);

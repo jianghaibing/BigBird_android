@@ -13,6 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.actions.RotateToAction;
 import com.badlogic.gdx.utils.Align;
 
 
+interface ICallBack{
+    void freeFall();
+}
+
 /**
  * Created by baby on 16/1/11.
  */
@@ -31,6 +35,13 @@ public class Bird extends Actor {
     private Circle bounds;
 
     private float time;
+    private float currentY = 0;
+
+    private ICallBack callBack;
+
+    public void setCallBack(ICallBack callBack) {
+        this.callBack = callBack;
+    }
 
     public Bird() {
         region = new TextureRegion(Assets.bird);
@@ -76,15 +87,21 @@ public class Bird extends Actor {
             state = State.stop;
 
         }
-        if (isAboveCeiling()){
-            setY(BigBirdGame.HEIGHT-getHeight());
-
-        }
+//        if (isAboveCeiling()){
+//            setY(BigBirdGame.HEIGHT - getHeight());
+//
+//        }
         jump();
     }
 
     private void jump(){
         if (Gdx.input.justTouched()){
+            float lastY = currentY;
+            currentY = getY();
+            if (lastY-currentY > BigBirdGame.HEIGHT){
+                callBack.freeFall();
+            }
+
             jumpVelocity -= 30;
             energy -= 2;
             velocity.y = jumpVelocity;
@@ -118,9 +135,9 @@ public class Bird extends Actor {
         return (getY(Align.bottom) <= 0);
     }
 
-    private boolean isAboveCeiling(){
-        return (getY(Align.topLeft) >= BigBirdGame.HEIGHT);
-    }
+//    private boolean isAboveCeiling(){
+//        return (getY(Align.topLeft) >= BigBirdGame.HEIGHT);
+//    }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {

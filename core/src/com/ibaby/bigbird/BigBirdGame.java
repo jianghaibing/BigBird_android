@@ -17,7 +17,6 @@ public class BigBirdGame extends Game{
 
 	@Override
 	public void create () {
-		playServices.signIn();
 		Assets.load();
 		DataManager.shareInstance().load();
 		setScreen(new GameMenuScreen(this,false));
