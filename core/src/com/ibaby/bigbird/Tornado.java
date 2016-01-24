@@ -32,8 +32,8 @@ public class Tornado extends Actor{
         setWidth(WIDTH);
         velocity = new Vector2(-500,0);
         state = State.alive;
-        bounds = new Rectangle(WIDTH/3f,10f,WIDTH/3f,(HEIGHT-10)/7f*3f);
-        circle = new Circle(WIDTH/3f+WIDTH/6f,10f+(HEIGHT-10)/7f*3f+(HEIGHT-10f)/7f*2,(HEIGHT-10f)/7f*2);
+        bounds = new Rectangle(WIDTH*0.4f,30f,WIDTH*0.2f,(HEIGHT-30)/7f*3f);
+        circle = new Circle(WIDTH/3f+WIDTH/6f,10f+(HEIGHT-30)/7f*3f+(HEIGHT-30f)/7f*2,(HEIGHT-30f)/7f*2);
     }
 
     public void setFirstPosition(){
@@ -75,8 +75,8 @@ public class Tornado extends Actor{
 
 
     private void updateBounds() {
-        bounds.x = getX()+WIDTH/3;
-        bounds.y = getY()+10;
+        bounds.x = getX()+WIDTH*0.4f;
+        bounds.y = getY()+30;
         circle.x = bounds.x+bounds.width/2;
         circle.y = bounds.y+bounds.height+circle.radius;
     }

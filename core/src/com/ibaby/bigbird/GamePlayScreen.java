@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -241,7 +242,7 @@ public class GamePlayScreen extends ScreenAdapter {
                 break;
         }
 
-
+//
 //        renderer.begin(ShapeRenderer.ShapeType.Filled);
 //        renderer.setColor(Color.RED);
 //        renderer.circle(bird.getBounds().x, bird.getBounds().y, bird.getBounds().radius);

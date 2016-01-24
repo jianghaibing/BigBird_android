@@ -51,7 +51,7 @@ public class Bird extends Actor {
         velocity = new Vector2(0,0);
         accel = new Vector2(0,GRAVITY);
         setOrigin(Align.center);
-        bounds = new Circle(WIDTH/2,WIDTH/2,WIDTH/2);
+        bounds = new Circle(HEIGHT/2,HEIGHT/2,HEIGHT/2);
 
     }
 
@@ -75,8 +75,8 @@ public class Bird extends Actor {
     }
 
     private void updateBounds() {
-        bounds.x = getX()+WIDTH/2;
-        bounds.y = getY()+WIDTH/2;
+        bounds.x = getX()+HEIGHT/2;
+        bounds.y = getY()+HEIGHT/2;
     }
 
     private void actAlive(float delta) {
