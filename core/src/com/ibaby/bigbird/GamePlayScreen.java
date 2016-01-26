@@ -10,6 +10,10 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
@@ -45,6 +49,7 @@ public class GamePlayScreen extends ScreenAdapter {
     private Label progressNumberLabel;
     private Image progressBackground;
     private Image currentProgress;
+    private Label congratulation;
 
     private int currentScore = 0;
     private int highestScore = 0;
@@ -63,6 +68,8 @@ public class GamePlayScreen extends ScreenAdapter {
 
     private float currentY = 0;
     private Rain rain;
+
+    private boolean isfirstClap = true;
 
 
     public GamePlayScreen(final BigBirdGame bigBirdGame) {
@@ -156,6 +163,9 @@ public class GamePlayScreen extends ScreenAdapter {
 
         Gdx.input.setInputProcessor(gamePlayStage);
 
+        congratulation = new Label("Congratulation! Record-breaking!",new Label.LabelStyle(Assets.bitmapFont,Color.valueOf("F5A623")));
+        congratulation.setPosition(BigBirdGame.WIDTH / 2, BigBirdGame.HEIGHT * 1.5f, Align.center);
+        gamePlayStage.addActor(congratulation);
 
     }
 
@@ -211,6 +221,13 @@ public class GamePlayScreen extends ScreenAdapter {
                 }
 
                 if (currentScore> highestScore){
+                    if (isfirstClap){
+                        playHandClapSound();
+                        isfirstClap = false;
+                        MoveByAction move = Actions.moveBy(0,-BigBirdGame.HEIGHT * 0.7f,0.2f);
+                        DelayAction delayAction = Actions.delay(3, Actions.removeActor());
+                        congratulation.addAction(Actions.sequence(move,delayAction));
+                    }
                     highestScore = currentScore;
                     highestScoreLabel.setText("BS:" + highestScore + "M");
                     highestScoreLabel.setAlignment(Align.bottomRight);
@@ -383,6 +400,10 @@ public class GamePlayScreen extends ScreenAdapter {
 
     private void playEatFishSound(){
         Assets.playEatFishSound();
+    }
+
+    private void playHandClapSound(){
+        Assets.playHnadClapSound();
     }
 
 }

@@ -64,7 +64,7 @@ public class AndroidLauncher extends AndroidApplication implements AdHandler,Pla
 		super.onCreate(savedInstanceState);
 
 		// 设置分享内容
-		mController.setShareContent("I am playing [Bird VS Wind],come and play with me. IOS download address: https://itunes.apple.com/us/app/bird-vs-wind/id1077626569?l=zh&ls=1&mt=8 Android download address: ");
+		mController.setShareContent("I am playing [Bird VS Wind],come and play with me. IOS download: https://itunes.apple.com/us/app/bird-vs-wind/id1077626569?l=zh&ls=1&mt=8 Android download:https://play.google.com/store/apps/details?id=com.ibaby.bigbird ");
 		// 设置分享图片, 参数2为图片的url地址
 		//mController.setShareMedia(new UMImage(getApplicationContext(), "https://is1-ssl.mzstatic.com/image/thumb/Purple69/v4/50/c1/9c/50c19cce-d29e-2b84-19e1-6161213c10be/pr_source.png/150x150bb.jpg"));
 
