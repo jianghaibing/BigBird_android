@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -60,6 +62,7 @@ public class GamePlayScreen extends ScreenAdapter {
     private boolean onlySmallFish = true;
 
     private float currentY = 0;
+    private Rain rain;
 
 
     public GamePlayScreen(final BigBirdGame bigBirdGame) {
@@ -129,17 +132,20 @@ public class GamePlayScreen extends ScreenAdapter {
         shark.setPosition(BigBirdGame.WIDTH * 0.15f, -shark.getHeight() * 4);
         gamePlayStage.addActor(shark);
 
+        rain = new Rain();
+        gamePlayStage.addActor(rain);
+
         water = new Water(Water.WaterSequence.FIRST);
         water2 = new Water(Water.WaterSequence.SECOND);
         water2.setPosition(BigBirdGame.WIDTH, 0);
         gamePlayStage.addActor(water);
         gamePlayStage.addActor(water2);
 //        renderer = new ShapeRenderer();
-        gamePlayStage.addListener(new ActorGestureListener(){
+        gamePlayStage.addListener(new ActorGestureListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchUp(event, x, y, pointer, button);
-                if (state == State.STATIC){
+                if (state == State.STATIC) {
                     bird.setState(Bird.State.alive);
                     tap.remove();
                     start.remove();
@@ -149,6 +155,8 @@ public class GamePlayScreen extends ScreenAdapter {
         });
 
         Gdx.input.setInputProcessor(gamePlayStage);
+
+
     }
 
     private void addFish(Stage gamePlayStage){
@@ -238,6 +246,7 @@ public class GamePlayScreen extends ScreenAdapter {
                 water.act(delta);
                 water2.act(delta);
                 bird.act(delta);
+                rain.act(delta);
                 gamePlayStage.draw();
                 break;
         }

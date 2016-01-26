@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -16,6 +17,7 @@ public class Assets {
     public static TextureAtlas atlas;
     public static SpriteBatch batch;
     public static BitmapFont bitmapFont;
+    public static ParticleEffect effect;
 
     public static Sound jump;
     public static Sound wind;
@@ -66,6 +68,9 @@ public class Assets {
         atlas = new TextureAtlas("pack.txt");
         batch = new SpriteBatch();
         bitmapFont = new BitmapFont(Gdx.files.internal("font/font.fnt"),Gdx.files.internal("font/font.png"),false);
+
+        effect = new ParticleEffect();
+        effect.load(Gdx.files.internal("particle/rain.p"),Gdx.files.internal(""));
 
         bird = atlas.findRegion("bird1");
         bird2 = atlas.findRegion("bird2");
@@ -154,6 +159,9 @@ public class Assets {
         }
         if (eatFish != null){
             eatFish.dispose();
+        }
+        if (effect != null){
+            effect.dispose();
         }
     }
 
