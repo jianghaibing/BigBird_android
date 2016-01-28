@@ -3,11 +3,13 @@ package com.ibaby.bigbird;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -21,6 +23,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+
+import java.util.Vector;
 
 
 /**
@@ -70,7 +74,8 @@ public class GamePlayScreen extends ScreenAdapter {
     private Rain rain;
 
     private boolean isfirstClap = true;
-
+    Vector<LightningBolt> bolts = new Vector<LightningBolt>();
+    Blots bls;
 
     public GamePlayScreen(final BigBirdGame bigBirdGame) {
         this.bigBirdGame = bigBirdGame;
@@ -82,6 +87,9 @@ public class GamePlayScreen extends ScreenAdapter {
         background2.setPosition(BigBirdGame.WIDTH, 0);
         gamePlayStage.addActor(background);
         gamePlayStage.addActor(background2);
+
+        bls = new Blots(bolts);
+        gamePlayStage.addActor(bls);
 
         ground = new Ground();
         gamePlayStage.addActor(ground);
@@ -385,6 +393,10 @@ public class GamePlayScreen extends ScreenAdapter {
         camera.setToOrtho(false, width, height);
         Assets.batch.setProjectionMatrix(camera.combined);
         gamePlayStage.getViewport().update(width, height, true);
+
+        for(int i=0; i<bolts.size(); i++){
+            bolts.get(i).draw(Assets.batch);
+        }
     }
 
 
@@ -405,5 +417,10 @@ public class GamePlayScreen extends ScreenAdapter {
     private void playHandClapSound(){
         Assets.playHnadClapSound();
     }
+
+
+
+
+
 
 }

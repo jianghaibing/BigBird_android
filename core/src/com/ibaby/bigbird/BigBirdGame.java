@@ -1,6 +1,8 @@
 package com.ibaby.bigbird;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class BigBirdGame extends Game{
 
@@ -19,6 +21,14 @@ public class BigBirdGame extends Game{
 
 	@Override
 	public void create () {
+
+		// Create assets manager
+		AssetManager assetManager = new AssetManager();
+		// create a new sprite batch to render the graphics
+		Art.load(assetManager);
+		assetManager.finishLoading();
+		Art.assignResource(assetManager);
+
 		Assets.load();
 		DataManager.shareInstance().load();
 		setScreen(new GameMenuScreen(this,false));

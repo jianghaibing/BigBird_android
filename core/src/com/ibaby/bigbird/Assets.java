@@ -26,6 +26,7 @@ public class Assets {
     public static Sound handClap;
     public static Sound warning;
     public static Sound eatFish;
+    public static Sound lightning;
 
     //undisposable
     public static TextureRegion bird;
@@ -126,6 +127,7 @@ public class Assets {
         handClap = Gdx.audio.newSound(Gdx.files.internal("sound/handclap.wav"));
         warning = Gdx.audio.newSound(Gdx.files.internal("sound/warning.wav"));
         eatFish = Gdx.audio.newSound(Gdx.files.internal("sound/eatFish.mp3"));
+        lightning = Gdx.audio.newSound(Gdx.files.internal("sound/lightning.mp3"));
 
     }
 
@@ -160,6 +162,11 @@ public class Assets {
         if (eatFish != null){
             eatFish.dispose();
         }
+
+        if (lightning != null){
+            lightning.dispose();
+        }
+
         if (effect != null){
             effect.dispose();
         }
@@ -197,5 +204,9 @@ public class Assets {
 
     public static void playEatFishSound(){
         eatFish.play(1f);
+    }
+
+    public static void playLightningSound(){
+        lightning.play(1f);
     }
 }
