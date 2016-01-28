@@ -126,7 +126,7 @@ public class AndroidLauncher extends AndroidApplication implements AdHandler,Pla
 		adView.setAdSize(AdSize.SMART_BANNER);
 		adView.setAdUnitId(BAN_ID);
 		AdRequest.Builder builder = new AdRequest.Builder();
-		builder.addTestDevice("F837025308B47710471BAA749C5153AF");
+		//builder.addTestDevice("F837025308B47710471BAA749C5153AF");
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
 				RelativeLayout.LayoutParams.WRAP_CONTENT,
 				RelativeLayout.LayoutParams.WRAP_CONTENT

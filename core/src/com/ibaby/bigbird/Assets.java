@@ -64,6 +64,7 @@ public class Assets {
     public static TextureRegion start;
     public static TextureRegion tap1;
     public static TextureRegion tap2;
+    public static TextureRegion loadingView;
 
     public static void load(){
         atlas = new TextureAtlas("pack.txt");
@@ -84,6 +85,7 @@ public class Assets {
         bg_wide = atlas.findRegion("bg_wide");
         water = atlas.findRegion("water");
         water2 = atlas.findRegion("water2");
+        loadingView = atlas.findRegion("loadingView");
 
         tornado = atlas.findRegion("tornado1");
         tornado2 = atlas.findRegion("tornado2");

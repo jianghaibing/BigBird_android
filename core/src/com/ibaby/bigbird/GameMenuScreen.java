@@ -87,6 +87,10 @@ public class GameMenuScreen extends ScreenAdapter {
             });
         }else {
 
+            MoveByAction moveOut = Actions.moveBy(0f,BigBirdGame.HEIGHT);
+            MoveByAction moveIn = Actions.moveBy(0f,-BigBirdGame.HEIGHT,0.2f);
+            stage.addAction(Actions.sequence(moveOut,moveIn));
+
             restartButton = new ImageButton(new TextureRegionDrawable(Assets.restartButton), new TextureRegionDrawable(Assets.restartButton_down));
             restartButton.setPosition(BigBirdGame.WIDTH / 2, BigBirdGame.HEIGHT / 2, Align.center);
             stage.addActor(restartButton);
@@ -113,17 +117,17 @@ public class GameMenuScreen extends ScreenAdapter {
             stage.addActor(scoreBoard);
 
             currentScoreLabel = new Label("Current Score: "+currentScore + "M",new Label.LabelStyle(Assets.bitmapFont, Color.WHITE));
-            currentScoreLabel.setPosition(bigBirdGame.WIDTH/2-currentScoreLabel.getWidth()/2, scoreBoard.getY()+ scoreBoard.getHeight()*0.7f,Align.center);
+            currentScoreLabel.setPosition(bigBirdGame.WIDTH / 2 - currentScoreLabel.getWidth() / 2, scoreBoard.getY() + scoreBoard.getHeight() * 0.7f, Align.center);
             currentScoreLabel.setFontScale(2f);
             stage.addActor(currentScoreLabel);
 
             highestScoreLabel = new Label("Best Score: "+highestScore + "M",new Label.LabelStyle(Assets.bitmapFont, Color.WHITE));
-            highestScoreLabel.setPosition(bigBirdGame.WIDTH/2-currentScoreLabel.getWidth()/2, scoreBoard.getY()+ scoreBoard.getHeight()*0.3f,Align.center);
+            highestScoreLabel.setPosition(bigBirdGame.WIDTH / 2 - currentScoreLabel.getWidth() / 2, scoreBoard.getY() + scoreBoard.getHeight() * 0.3f, Align.center);
             highestScoreLabel.setFontScale(2f);
             stage.addActor(highestScoreLabel);
 
             gameOver = new Image(Assets.gameOver);
-            gameOver.setPosition(BigBirdGame.WIDTH/2,scoreBoard.getY()+scoreBoard.getHeight() + BUTTON_DISTANCE+gameOver.getHeight()/2,Align.center);
+            gameOver.setPosition(BigBirdGame.WIDTH / 2, scoreBoard.getY() + scoreBoard.getHeight() + BUTTON_DISTANCE + gameOver.getHeight() / 2, Align.center);
             stage.addActor(gameOver);
 
 

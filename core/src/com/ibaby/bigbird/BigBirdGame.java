@@ -31,7 +31,7 @@ public class BigBirdGame extends Game{
 
 		Assets.load();
 		DataManager.shareInstance().load();
-		setScreen(new GameMenuScreen(this,false));
+		setScreen(new GameLoadingScreen(this));
 
 	}
 
