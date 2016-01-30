@@ -14,7 +14,7 @@ public class DesktopLauncher{
 		config.width = BigBirdGame.WIDTH;
 		config.height = BigBirdGame.HEIGHT;
 		config.title = BigBirdGame.TITLE;
-		new LwjglApplication(new BigBirdGame(null), config);
+		new LwjglApplication(new BigBirdGame(null,null,null), config);
 	}
 
 

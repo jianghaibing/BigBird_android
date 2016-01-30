@@ -2,30 +2,37 @@ pack.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+loadingView
+  rotate: false
+  xy: 2, 1924
+  size: 1080, 1918
+  orig: 1080, 1920
+  offset: 0, 2
+  index: -1
 bird3
   rotate: false
-  xy: 3658, 155
+  xy: 3863, 1711
   size: 210, 189
   orig: 210, 189
   offset: 0, 0
   index: -1
 tornado1
   rotate: false
-  xy: 1852, 415
+  xy: 3791, 1183
   size: 244, 361
   orig: 246, 363
   offset: 1, 0
   index: -1
 shark
   rotate: false
-  xy: 1852, 128
+  xy: 3791, 896
   size: 264, 285
   orig: 264, 285
   offset: 0, 0
   index: -1
 leaderBoard_down
   rotate: false
-  xy: 2709, 896
+  xy: 2934, 1870
   size: 693, 201
   orig: 693, 201
   offset: 0, 0
@@ -39,21 +46,21 @@ tap2
   index: -1
 achievement_down
   rotate: false
-  xy: 2547, 1302
+  xy: 2861, 2073
   size: 693, 201
   orig: 693, 201
   offset: 0, 0
   index: -1
 rain
   rotate: false
-  xy: 2299, 2
+  xy: 4016, 2
   size: 28, 63
   orig: 30, 63
   offset: 0, 0
   index: -1
 restartGame
   rotate: false
-  xy: 1852, 1667
+  xy: 2934, 1667
   size: 693, 201
   orig: 693, 201
   offset: 0, 0
@@ -67,14 +74,14 @@ bg_wide
   index: -1
 background2
   rotate: false
-  xy: 2, 1924
+  xy: 1084, 1924
   size: 1080, 1918
   orig: 1080, 1920
   offset: 0, 2
   index: -1
 bird1
   rotate: false
-  xy: 3443, 155
+  xy: 3863, 1546
   size: 213, 163
   orig: 213, 165
   offset: 0, 2
@@ -88,21 +95,21 @@ share_down
   index: -1
 leaderBoard
   rotate: false
-  xy: 2709, 1099
+  xy: 2166, 1922
   size: 693, 201
   orig: 693, 201
   offset: 0, 0
   index: -1
 gameOver
   rotate: false
-  xy: 1852, 2
-  size: 445, 124
-  orig: 447, 126
-  offset: 2, 1
+  xy: 2166, 2328
+  size: 595, 103
+  orig: 597, 105
+  offset: 1, 2
   index: -1
 restartGame_down
   rotate: false
-  xy: 1852, 1464
+  xy: 2934, 1464
   size: 693, 201
   orig: 693, 201
   offset: 0, 0
@@ -116,56 +123,56 @@ startGame_down
   index: -1
 share
   rotate: false
-  xy: 1852, 1261
+  xy: 2934, 1261
   size: 693, 201
   orig: 693, 201
   offset: 0, 0
   index: -1
 water
   rotate: false
-  xy: 2361, 449
+  xy: 2934, 449
   size: 1080, 445
   orig: 1080, 447
   offset: 0, 0
   index: -1
 background
   rotate: false
-  xy: 1084, 1924
+  xy: 1852, 2
   size: 1080, 1918
   orig: 1080, 1920
   offset: 0, 2
   index: -1
 progressGreen
   rotate: false
-  xy: 2327, 94
+  xy: 4030, 67
   size: 12, 90
   orig: 12, 90
   offset: 0, 0
   index: -1
 progressBackground
   rotate: false
-  xy: 2329, 2
+  xy: 4046, 2
   size: 24, 90
   orig: 24, 90
   offset: 0, 0
   index: -1
 water2
   rotate: false
-  xy: 2361, 2
+  xy: 2934, 2
   size: 1080, 445
   orig: 1080, 447
   offset: 0, 0
   index: -1
 achievement
   rotate: false
-  xy: 3242, 1302
+  xy: 2166, 2125
   size: 693, 201
   orig: 693, 201
   offset: 0, 0
   index: -1
 fish1
   rotate: false
-  xy: 2166, 128
+  xy: 3629, 1261
   size: 120, 52
   orig: 120, 54
   offset: 0, 1
@@ -179,28 +186,28 @@ startGame
   index: -1
 bird2
   rotate: false
-  xy: 3443, 320
+  xy: 3863, 1902
   size: 210, 160
   orig: 210, 162
   offset: 0, 2
   index: -1
 progressRed
   rotate: false
-  xy: 2299, 67
+  xy: 4072, 2
   size: 12, 90
   orig: 12, 90
   offset: 0, 0
   index: -1
 tornado2
   rotate: false
-  xy: 2118, 186
+  xy: 3629, 1546
   size: 232, 361
   orig: 234, 363
   offset: 1, 0
   index: -1
 scoreBoard
   rotate: false
-  xy: 1852, 896
+  xy: 2934, 896
   size: 855, 363
   orig: 855, 363
   offset: 0, 0
@@ -214,7 +221,7 @@ tap1
   index: -1
 progressOrange
   rotate: false
-  xy: 2313, 67
+  xy: 4016, 67
   size: 12, 90
   orig: 12, 90
   offset: 0, 0
@@ -228,8 +235,8 @@ fish2
   index: -1
 start
   rotate: false
-  xy: 3443, 2
-  size: 642, 151
-  orig: 642, 153
-  offset: 0, 1
+  xy: 2861, 2276
+  size: 678, 84
+  orig: 678, 84
+  offset: 0, 0
   index: -1

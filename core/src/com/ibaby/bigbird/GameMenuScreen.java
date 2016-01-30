@@ -87,6 +87,10 @@ public class GameMenuScreen extends ScreenAdapter {
             });
         }else {
 
+            MoveByAction moveOut = Actions.moveBy(0f,BigBirdGame.HEIGHT);
+            MoveByAction moveIn = Actions.moveBy(0f,-BigBirdGame.HEIGHT,0.2f);
+            stage.addAction(Actions.sequence(moveOut,moveIn));
+
             restartButton = new ImageButton(new TextureRegionDrawable(Assets.restartButton), new TextureRegionDrawable(Assets.restartButton_down));
             restartButton.setPosition(BigBirdGame.WIDTH / 2, BigBirdGame.HEIGHT / 2, Align.center);
             stage.addActor(restartButton);
@@ -112,18 +116,18 @@ public class GameMenuScreen extends ScreenAdapter {
             scoreBoard.setPosition(BigBirdGame.WIDTH / 2, BigBirdGame.HEIGHT / 2 + BUTTON_DISTANCE + scoreBoard.getHeight() / 2 + restartButton.getHeight() / 2, Align.center);
             stage.addActor(scoreBoard);
 
-            currentScoreLabel = new Label("当前飞行: "+currentScore + "M",new Label.LabelStyle(Assets.bitmapFont, Color.WHITE));
-            currentScoreLabel.setPosition(bigBirdGame.WIDTH/2-currentScoreLabel.getWidth()/2, scoreBoard.getY()+ scoreBoard.getHeight()*0.7f,Align.center);
+            currentScoreLabel = new Label("Current Score: "+currentScore + "M",new Label.LabelStyle(Assets.bitmapFont, Color.WHITE));
+            currentScoreLabel.setPosition(bigBirdGame.WIDTH / 2 - currentScoreLabel.getWidth() / 2, scoreBoard.getY() + scoreBoard.getHeight() * 0.7f, Align.center);
             currentScoreLabel.setFontScale(2f);
             stage.addActor(currentScoreLabel);
 
-            highestScoreLabel = new Label("最高飞行: "+highestScore + "M",new Label.LabelStyle(Assets.bitmapFont, Color.WHITE));
-            highestScoreLabel.setPosition(bigBirdGame.WIDTH/2-currentScoreLabel.getWidth()/2, scoreBoard.getY()+ scoreBoard.getHeight()*0.3f,Align.center);
+            highestScoreLabel = new Label("Best Score: "+highestScore + "M",new Label.LabelStyle(Assets.bitmapFont, Color.WHITE));
+            highestScoreLabel.setPosition(bigBirdGame.WIDTH / 2 - currentScoreLabel.getWidth() / 2, scoreBoard.getY() + scoreBoard.getHeight() * 0.3f, Align.center);
             highestScoreLabel.setFontScale(2f);
             stage.addActor(highestScoreLabel);
 
             gameOver = new Image(Assets.gameOver);
-            gameOver.setPosition(BigBirdGame.WIDTH/2,scoreBoard.getY()+scoreBoard.getHeight() + BUTTON_DISTANCE+gameOver.getHeight()/2,Align.center);
+            gameOver.setPosition(BigBirdGame.WIDTH / 2, scoreBoard.getY() + scoreBoard.getHeight() + BUTTON_DISTANCE + gameOver.getHeight() / 2, Align.center);
             stage.addActor(gameOver);
 
 
@@ -142,7 +146,7 @@ public class GameMenuScreen extends ScreenAdapter {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchUp(event, x, y, pointer, button);
-
+                bigBirdGame.playServices.showScore();
             }
         });
 
@@ -159,6 +163,7 @@ public class GameMenuScreen extends ScreenAdapter {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchUp(event, x, y, pointer, button);
+                bigBirdGame.playServices.showAchievement();
             }
         });
 
@@ -175,6 +180,7 @@ public class GameMenuScreen extends ScreenAdapter {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchUp(event, x, y, pointer, button);
+                bigBirdGame.shareInterface.share();
             }
         });
 
@@ -205,7 +211,7 @@ public class GameMenuScreen extends ScreenAdapter {
 
 
     public void setScore(int currentScore,int highestScore){
-        currentScoreLabel.setText("当前飞行: " + currentScore + "M");
-        highestScoreLabel.setText("最高飞行: " + highestScore + "M");
+        currentScoreLabel.setText("Current Score: " + currentScore + "M");
+        highestScoreLabel.setText("Best Score: " + highestScore + "M");
     }
 }

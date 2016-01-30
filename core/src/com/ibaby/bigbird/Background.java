@@ -25,7 +25,7 @@ public class Background extends Image{
         }
         setHeight(BigBirdGame.HEIGHT);
         setWidth(BigBirdGame.WIDTH);
-        velocity = new Vector2(-150,0);
+        velocity = new Vector2(-250,0);
     }
 
 

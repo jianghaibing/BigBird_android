@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Big Bird</string>
+    <string name="app_name">Bird VS Wind</string>
+    <string name="app_id">638608527597</string>
+    <string name="facebook_app_id">780183162114130</string>
 
 </resources>

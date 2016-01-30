@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -16,6 +17,7 @@ public class Assets {
     public static TextureAtlas atlas;
     public static SpriteBatch batch;
     public static BitmapFont bitmapFont;
+    public static ParticleEffect effect;
 
     public static Sound jump;
     public static Sound wind;
@@ -24,6 +26,7 @@ public class Assets {
     public static Sound handClap;
     public static Sound warning;
     public static Sound eatFish;
+    public static Sound lightning;
 
     //undisposable
     public static TextureRegion bird;
@@ -61,11 +64,15 @@ public class Assets {
     public static TextureRegion start;
     public static TextureRegion tap1;
     public static TextureRegion tap2;
+    public static TextureRegion loadingView;
 
     public static void load(){
         atlas = new TextureAtlas("pack.txt");
         batch = new SpriteBatch();
         bitmapFont = new BitmapFont(Gdx.files.internal("font/font.fnt"),Gdx.files.internal("font/font.png"),false);
+
+        effect = new ParticleEffect();
+        effect.load(Gdx.files.internal("particle/rain.p"),Gdx.files.internal(""));
 
         bird = atlas.findRegion("bird1");
         bird2 = atlas.findRegion("bird2");
@@ -78,6 +85,7 @@ public class Assets {
         bg_wide = atlas.findRegion("bg_wide");
         water = atlas.findRegion("water");
         water2 = atlas.findRegion("water2");
+        loadingView = atlas.findRegion("loadingView");
 
         tornado = atlas.findRegion("tornado1");
         tornado2 = atlas.findRegion("tornado2");
@@ -121,6 +129,7 @@ public class Assets {
         handClap = Gdx.audio.newSound(Gdx.files.internal("sound/handclap.wav"));
         warning = Gdx.audio.newSound(Gdx.files.internal("sound/warning.wav"));
         eatFish = Gdx.audio.newSound(Gdx.files.internal("sound/eatFish.mp3"));
+        lightning = Gdx.audio.newSound(Gdx.files.internal("sound/lightning.mp3"));
 
     }
 
@@ -154,6 +163,14 @@ public class Assets {
         }
         if (eatFish != null){
             eatFish.dispose();
+        }
+
+        if (lightning != null){
+            lightning.dispose();
+        }
+
+        if (effect != null){
+            effect.dispose();
         }
     }
 
@@ -189,5 +206,9 @@ public class Assets {
 
     public static void playEatFishSound(){
         eatFish.play(1f);
+    }
+
+    public static void playLightningSound(){
+        lightning.play(1f);
     }
 }

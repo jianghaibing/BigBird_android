@@ -31,7 +31,7 @@ public class SmallFish extends Actor {
     }
 
     private void randomGravity(){
-        gravity = MathUtils.random(300,500);
+        gravity = MathUtils.random(500,800);
     }
 
     private void randomFishX(){
